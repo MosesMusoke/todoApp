@@ -1,0 +1,258 @@
+:root {
+  --clr-primary: rgb(54, 112, 199);
+  --clr-light: rgb(244, 244, 244);
+  --clr-dark: #333;
+  --clr-warning: rgb(99, 36, 36);
+}
+
+*, *::before, *::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+body {
+  padding-left: 1rem;
+  margin: 0;
+  font-family: 'work-sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  background-color: var(--clr-primary);
+  color: var(--clr-light);
+
+  display: grid;
+  grid: 
+    'header header header header' auto
+    '...... lists  active-list ......' auto /
+    1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
+}
+
+.title {
+  grid-area: header;
+  text-align: center;
+  font-size: calc(7vw + 2rem);
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin: -1.2rem 0;
+}
+
+.all-tasks {
+  grid-area: lists;
+}
+
+.task-list {
+  line-height: 1.7;
+  font-size: 1.2rem;
+  list-style: circle;
+  padding-left: 1.3rem;
+}
+
+.list-name {
+  cursor: pointer;
+}
+
+.list-name:hover {
+  opacity: .7;
+}
+
+.active-list {
+  font-weight: 900;
+}
+
+.new::placeholder {
+  color: rgb(244, 244, 244, .4);
+  font-size: .8rem;
+}
+
+.new {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  font-size: 1rem;
+  outline: none;
+
+  transition: border-bottom 100ms ease-in-out;
+
+  order: 2;
+  padding: .5rem;
+}
+
+.new:focus {
+  border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+  opacity: 0.2;
+}
+
+.new.task {
+  margin-bottom: 0;
+}
+
+.new.task::placeholder {
+  color: var(--clr-primary);
+}
+
+.new.list::placeholder {
+  color: var(--clr-light);
+  opacity: .6;
+}
+
+form {
+  display: flex;
+}
+
+.btn {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.btn.create {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: .25rem;
+  transition: opacity 150ms ease-in-out;
+}
+
+.btn.create:hover {
+  opacity: .7;
+}
+
+.todo-list {
+  grid-area: active-list;
+  margin-left: 4.5rem;
+  background-color: var(--clr-light);
+  color: var(--clr-dark);
+  margin-top: 1rem;
+}
+
+.todo-header {
+  padding: 1rem;
+  background: #e4e4e4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.new-task-creator .create {
+  color: var(--clr-primary);
+}
+
+.list-title {
+  margin: 0;
+  margin-left: .5rem;
+}
+
+.task-count {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.todo-body {
+  padding: 1rem;
+  position: relative;
+}
+
+[type='checkbox'] {
+  opacity: 0;
+  position: absolute;
+}
+
+.task label {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.task {
+  position: relative;
+  margin-bottom: 1.3rem;
+}
+
+.task::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  bottom: -0.5rem;
+  background-color: currentColor;
+  opacity: 0.1;
+}
+
+.custom-checkbox {
+  --size: .75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  cursor: pointer;
+  margin-right: var(--size);
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+
+.task:hover .custom-checkbox,
+[type='checkbox']:focus + label .custom-checkbox {
+  transform: scale(1.3);
+  color: var(--clr-primary);
+}
+
+[type='checkbox']:checked + label .custom-checkbox {
+  background-color: var(--clr-primary);
+  border-color: var(--clr-primary);
+  box-shadow: inset 0 0 0 2px white;
+}
+
+[type='checkbox']:checked + label {
+  opacity: 0.5;
+}
+
+.task label::after {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 150ms ease-in-out;
+}
+
+[type='checkbox']:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.todo-body {
+  height: 70%;
+  position: relative;
+}
+
+.delete-stuff {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -3rem;
+  color: var(--clr-light);
+}
+
+.btn.delete {
+  opacity: .8;
+  font-size: .9rem;
+  transition: color 200ms ease-in-out;
+}
+
+.btn.delete:hover {
+  color: var(--clr-warning);
+}
+
